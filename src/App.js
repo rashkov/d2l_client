@@ -4,9 +4,6 @@ import * as _ from "lodash";
 import * as d2l_logo from "./d2l_logo.png";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div
@@ -18,7 +15,11 @@ class App extends Component {
           backgroundColor: "white"
         }}
       >
-        <img src={d2l_logo} style={{ marginBottom: "30px" }} />
+        <img
+          src={d2l_logo}
+          style={{ marginBottom: "30px", marginTop: "30px" }}
+          alt="dialog to learn dot org"
+        />
         {_.range(0, this.props.rows).map(i => {
           return (
             <div key={i}>
