@@ -10,7 +10,7 @@ class App extends Component {
         className="App"
         style={{
           display: "block",
-          width: "100%",
+          width: "1600px",
           height: "100%",
           backgroundColor: "white"
         }}
