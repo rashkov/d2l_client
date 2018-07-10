@@ -2,13 +2,15 @@ import React, { Component } from "react";
 /* import "./App.css"; */
 import * as _ from "lodash";
 import * as d2l_logo from "./d2l_logo.png";
+import data from "./sample_json.js";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       logged_in: false,
-      retry: false
+      retry: false,
+      data: data
     };
   }
   login(evt) {
@@ -26,7 +28,7 @@ class App extends Component {
     let main;
     if (!this.state.logged_in) {
       main = (
-        <div style={{ marginTop: "10%" }}>
+        <div>
           <div
             style={{
               opacity: this.state.retry ? 1 : 0,
@@ -58,11 +60,6 @@ class App extends Component {
     } else {
       main = (
         <div>
-          <img
-            src={d2l_logo}
-            style={{ marginBottom: "30px", marginTop: "30px" }}
-            alt="dialog to learn dot org"
-          />
           {_.range(0, this.props.rows).map(i => {
             return (
               <div key={i}>
@@ -108,6 +105,17 @@ class App extends Component {
           backgroundColor: "white"
         }}
       >
+        <div className="col-sm-12">
+          <img
+            src={d2l_logo}
+            style={{
+              marginBottom: "30px",
+              marginTop: "30px",
+              width: "300px"
+            }}
+            alt="dialog to learn dot org"
+          />
+        </div>
         <div className="col-sm-12">{main}</div>
       </div>
     );
