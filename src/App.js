@@ -35,8 +35,10 @@ class App extends Component {
         let color;
         if (exchange.type === "student_to_mentor") {
           color = "#48ab97";
-        } else if (exchange.type === "student_to_mentor") {
+        } else if (exchange.type === "mentor_to_student") {
           color = "#21265e";
+        } else {
+          color = "#ffffff";
         }
         exchange_columns.push(
           <div
@@ -48,6 +50,7 @@ class App extends Component {
               backgroundColor: color,
               border: "1px solid black",
               margin: "5px",
+              marginBottom: "-5px",
               borderRadius: "5px"
             }}
           />
@@ -56,7 +59,12 @@ class App extends Component {
       let student_row = (
         <div>
           <div
-            style={{ display: "inline-block", width: "50px", height: "30px" }}
+            style={{
+              display: "inline-block",
+              width: "50px",
+              height: "30px",
+              lineHeight: "30px"
+            }}
           >
             {student.name}
           </div>
