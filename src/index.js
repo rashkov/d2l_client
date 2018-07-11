@@ -8,6 +8,6 @@ import { unregister } from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 
-ReactDOM.render(<App rows="40" cols="25" />, document.getElementById("root"));
+ReactDOM.render(<App rows="4" cols="2" />, document.getElementById("root"));
 //registerServiceWorker();
 unregister();

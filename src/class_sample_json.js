@@ -1,4 +1,4 @@
-export default [{
+export default {
   id: 19,
   class_name: "1st period",
   students: [{
@@ -38,5 +38,5 @@ export default [{
       }
     ]
   }]
-}];
+};
 

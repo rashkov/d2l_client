@@ -2,7 +2,7 @@ import React, { Component } from "react";
 /* import "./App.css"; */
 import * as _ from "lodash";
 import * as d2l_logo from "./d2l_logo.png";
-import data from "./sample_json.js";
+import data from "./class_sample_json.js";
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       logged_in: false,
       retry: false,
-      data: data
+      classroom: data
     };
   }
   login(evt) {
@@ -25,7 +25,51 @@ class App extends Component {
     }
   }
   render() {
-    let main;
+    let main,
+      rows = [];
+
+    _.each(this.state.classroom.students, student => {
+      console.log(student);
+      let exchange_columns = [];
+      _.each(student.exchanges, exchange => {
+        let color;
+        if (exchange.type === "student_to_mentor") {
+          color = "#48ab97";
+        } else if (exchange.type === "student_to_mentor") {
+          color = "#21265e";
+        }
+        exchange_columns.push(
+          <div
+            key={exchange.id}
+            style={{
+              display: "inline-block",
+              width: "30px",
+              height: "30px",
+              backgroundColor: color,
+              border: "1px solid black",
+              margin: "5px",
+              borderRadius: "5px"
+            }}
+          />
+        );
+      });
+      let student_row = (
+        <div>
+          <div
+            style={{ display: "inline-block", width: "50px", height: "30px" }}
+          >
+            {student.name}
+          </div>
+          <div
+            style={{ display: "inline-block", width: "50px", height: "30px" }}
+          >
+            {student.mentor.name}
+          </div>
+          {exchange_columns}
+        </div>
+      );
+      rows.push(student_row);
+    });
     if (!this.state.logged_in) {
       main = (
         <div>
@@ -58,42 +102,43 @@ class App extends Component {
         </div>
       );
     } else {
-      main = (
-        <div>
-          {_.range(0, this.props.rows).map(i => {
-            return (
-              <div key={i}>
-                {_.range(0, this.props.cols).map(j => {
-                  let color,
-                    rnd = Math.random();
-                  if (rnd > 0.8) {
-                    color = "#48ab97";
-                  } else if (rnd < 0.8 && rnd > 0.6) {
-                    color = "#ffffff";
-                  } else {
-                    color = "#21265e";
-                  }
+      main = rows;
+      /* main = (
+       *   <div>
+       *     {_.range(0, this.props.rows).map(i => {
+       *       return (
+       *         <div key={i}>
+       *           {_.range(0, this.props.cols).map(j => {
+       *             let color,
+       *               rnd = Math.random();
+       *             if (rnd > 0.8) {
+       *               color = "#48ab97";
+       *             } else if (rnd < 0.8 && rnd > 0.6) {
+       *               color = "#ffffff";
+       *             } else {
+       *               color = "#21265e";
+       *             }
 
-                  return (
-                    <div
-                      key={j}
-                      style={{
-                        display: "inline-block",
-                        width: "30px",
-                        height: "30px",
-                        backgroundColor: color,
-                        border: "1px solid black",
-                        margin: "5px",
-                        borderRadius: "5px"
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      );
+       *             return (
+       *               <div
+       *                 key={j}
+       *                 style={{
+       *                   display: "inline-block",
+       *                   width: "30px",
+       *                   height: "30px",
+       *                   backgroundColor: color,
+       *                   border: "1px solid black",
+       *                   margin: "5px",
+       *                   borderRadius: "5px"
+       *                 }}
+       *               />
+       *             );
+       *           })}
+       *         </div>
+       *       );
+       *     })}
+       *   </div>
+       * ); */
     }
     return (
       <div
