@@ -16,7 +16,7 @@ export default {
       },
       exchanges: [
         {
-          date: "2018-02-02",
+          date_received: "2018-04-04",
           type: "mentor_to_student",
           text: "...",
           released_by: null,
@@ -26,7 +26,7 @@ export default {
           flagged_by: null
         },
         {
-          date: "2018-02-02",
+          date_received: "2018-03-03",
           type: "student_to_mentor",
           text: "...",
           released_by: null,
@@ -36,7 +36,7 @@ export default {
           flagged_by: null
         },
         {
-          date: "2018-02-02",
+          date_received: "2018-02-02",
           type: "student_to_mentor",
           text: "...",
 
@@ -47,10 +47,9 @@ export default {
           flagged_by: null
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -58,10 +57,9 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -69,7 +67,7 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-02",
+          date_received: "2018-02-02",
           type: "student_to_mentor",
           text: "...",
 
@@ -80,10 +78,9 @@ export default {
           flagged_by: null
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -91,10 +88,9 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -102,10 +98,9 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -128,7 +123,7 @@ export default {
       },
       exchanges: [
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
           released_by: null,
@@ -138,7 +133,7 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-02",
+          date_received: "2018-02-02",
           type: "student_to_mentor",
           text: "...",
 
@@ -149,10 +144,9 @@ export default {
           flagged_by: null
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -160,10 +154,9 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -171,10 +164,9 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,
@@ -182,10 +174,9 @@ export default {
           flagged_by: 22
         },
         {
-          date: "2018-02-03",
+          date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
-          released: false,
           released_by: null,
           release_date: "2018-07-13",
           flagged: true,

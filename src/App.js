@@ -26,11 +26,27 @@ class App extends Component {
     }
   }
   getSquareJSX(email) {
+    console.log(email);
+    let unreleased = !email.release_date;
+    /* let colors = {
+     *   student_email_needs_review: '#b6e4da',
+     *   student_email_released: '#48ab97',
+     *   mentor_email_needs_review: '#b6e4da',
+     *   mentor_email_released: '#48ab97',
+     * } */
     let color;
     if (email.type === "student_to_mentor") {
-      color = "#48ab97";
+      if (unreleased) {
+        color = "#b6e4da";
+      } else {
+        color = "#48ab97";
+      }
     } else if (email.type === "mentor_to_student") {
-      color = "#21265e";
+      if (unreleased) {
+        color = "#76a0e7";
+      } else {
+        color = "#21265e";
+      }
     } else {
       color = "#ffffff";
     }
@@ -114,11 +130,10 @@ class App extends Component {
       })
       .value();
     if (squares.length > 0) {
-      console.log("opa");
       let node = (
         <div
           style={{
-            border: "1px solid black",
+            border: "1px solid #cc0000",
             display: "inline-block",
             paddingBottom: "5px"
           }}
@@ -134,11 +149,36 @@ class App extends Component {
       rows = [];
 
     _.each(this.state.classroom.students, student => {
+      let sorted_exchanges = _.chain(student.exchanges)
+        .sortBy("date_received")
+        .reverse()
+        .value();
+
       let released_emails_column = [];
-      _.each(student.exchanges, exchange => {
-        released_emails_column.push(this.getSquareJSX(exchange));
+      let sorted_exchanges_with_gaps = _.chain(sorted_exchanges)
+        .reduce((exchanges_with_gaps, email) => {
+          let l, gap_length;
+          if ((l = exchanges_with_gaps.length)) {
+            console.log(exchanges_with_gaps[l - 1].date, email.date);
+            let date1 = new Date(exchanges_with_gaps[l - 1].date);
+            let date2 = new Date(email.date);
+            gap_length = Math.abs(date1 - date2);
+            console.log(gap_length);
+            /* if (gap_length = Math.abs(new Date(exchanges_with_gaps[l - 1].date) - (email.date)) < 2) {
+             *   console.log(gap_length)
+             * } */
+          }
+          exchanges_with_gaps.push(email);
+          return exchanges_with_gaps;
+        }, [])
+        .value();
+      _.each(sorted_exchanges, email => {
+        if (email.release_date) {
+          released_emails_column.push(this.getSquareJSX(email));
+        }
       });
-      let action_column = this.getActionColumnJSX(student.exchanges);
+
+      let action_column = this.getActionColumnJSX(sorted_exchanges);
       let student_row = this.getStudentRowJSX(
         student,
         action_column,
