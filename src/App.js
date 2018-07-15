@@ -25,18 +25,18 @@ class App extends Component {
       }, 1000);
     }
   }
-  exchangeColumnJSX(exchange) {
+  getSquareJSX(email) {
     let color;
-    if (exchange.type === "student_to_mentor") {
+    if (email.type === "student_to_mentor") {
       color = "#48ab97";
-    } else if (exchange.type === "mentor_to_student") {
+    } else if (email.type === "mentor_to_student") {
       color = "#21265e";
     } else {
       color = "#ffffff";
     }
     return (
       <div
-        key={exchange.id}
+        key={email.id}
         style={{
           display: "inline-block",
           width: "30px",
@@ -50,7 +50,7 @@ class App extends Component {
       />
     );
   }
-  getStudentRowJSX(student, exchange_columns) {
+  getStudentRowJSX(student, action_column, released_emails_column) {
     return (
       <div>
         <div
@@ -65,7 +65,8 @@ class App extends Component {
         <div style={{ display: "inline-block", width: "50px", height: "30px" }}>
           {student.mentor.name}
         </div>
-        {exchange_columns}
+        {action_column}
+        {released_emails_column}
       </div>
     );
   }
@@ -101,17 +102,48 @@ class App extends Component {
       </div>
     );
   }
+  getActionColumnJSX(exchanges) {
+    let squares = _.chain(exchanges)
+      .map(email => {
+        if (!email.release_date) {
+          return this.getSquareJSX(email);
+        }
+      })
+      .filter(item => {
+        return item;
+      })
+      .value();
+    if (squares.length > 0) {
+      console.log("opa");
+      let node = (
+        <div
+          style={{
+            border: "1px solid black",
+            display: "inline-block",
+            paddingBottom: "5px"
+          }}
+        >
+          {squares}
+        </div>
+      );
+      return node;
+    }
+  }
   render() {
     let main,
       rows = [];
 
     _.each(this.state.classroom.students, student => {
-      console.log(student);
-      let exchange_columns = [];
+      let released_emails_column = [];
       _.each(student.exchanges, exchange => {
-        exchange_columns.push(this.exchangeColumnJSX(exchange));
+        released_emails_column.push(this.getSquareJSX(exchange));
       });
-      let student_row = this.getStudentRowJSX(student, exchange_columns);
+      let action_column = this.getActionColumnJSX(student.exchanges);
+      let student_row = this.getStudentRowJSX(
+        student,
+        action_column,
+        released_emails_column
+      );
       rows.push(student_row);
     });
     if (!this.state.logged_in) {
