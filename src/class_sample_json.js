@@ -57,9 +57,9 @@ export default {
           text: "...",
           released_by: null,
           release_date: "2018-07-13",
-          flagged: true,
+          flagged: false,
           flagged_by_filter: false,
-          flagged_by: 22
+          flagged_by: null
         },
         {
           id: "6",
@@ -80,9 +80,9 @@ export default {
           text: "...",
           released_by: null,
           release_date: "2018-07-13",
-          flagged: true,
+          flagged: false,
           flagged_by_filter: false,
-          flagged_by: 22
+          flagged_by: null
         },
         {
           id: "9",
@@ -117,7 +117,7 @@ export default {
           text: "...",
           released_by: null,
           release_date: "2018-07-13",
-          flagged: true,
+          flagged: false,
           flagged_by_filter: false,
           flagged_by: 22
         },
@@ -140,7 +140,7 @@ export default {
           text: "...",
           released_by: null,
           release_date: "2018-07-13",
-          flagged: true,
+          flagged: false,
           flagged_by_filter: false,
           flagged_by: 22
         },
@@ -151,7 +151,7 @@ export default {
           text: "...",
           released_by: null,
           release_date: "2018-07-13",
-          flagged: true,
+          flagged: false,
           flagged_by_filter: false,
           flagged_by: 22
         }

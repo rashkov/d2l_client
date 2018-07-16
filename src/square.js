@@ -39,7 +39,7 @@ class Square extends Component {
       color = "#ffffff";
     }
     let email_obj = _.chain(this.state.email).keys().map((key)=>{
-      return <div><b>{key}</b>: {this.state.email[key] || 'null'}</div>
+      return <div><b>{key}</b>: {JSON.stringify(this.state.email[key] || 'null')}</div>
     }).value();
     return (
       <div
@@ -54,9 +54,15 @@ class Square extends Component {
           border: "1px solid black",
           margin: "5px",
           marginBottom: "-5px",
-          borderRadius: "5px"
+          borderRadius: "5px",
+          position: 'relative'
         }}
       >
+        {
+          (this.state.email.flagged)
+            ? <div style={{color:'white', position: 'absolute'}}>F</div>
+            : ''
+        }
         <Popover
           placement="bottom"
           isOpen={this.state.popoverOpen}
