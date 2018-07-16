@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 export default {
   id: 19,
   class_name: "1st period",
@@ -17,7 +18,7 @@ export default {
       exchanges: [
         {
           id: "1",
-          date_received: "2018-04-04",
+          date_received: "2018-03-03",
           type: "mentor_to_student",
           text: "...",
           released_by: null,
@@ -28,7 +29,7 @@ export default {
         },
         {
           id: "2",
-          date_received: "2018-03-03",
+          date_received: "2018-02-28",
           type: "student_to_mentor",
           text: "...",
           released_by: null,
@@ -39,19 +40,19 @@ export default {
         },
         {
           id: "3",
-          date_received: "2018-02-02",
+          date_received: "2018-02-28",
           type: "student_to_mentor",
           text: "...",
 
           released_by: 22,
-          release_date: "2018-02-03",
+          release_date: "2018-02-27",
           flagged: false,
           flagged_by_filter: false,
           flagged_by: null
         },
         {
           id: "4",
-          date_received: "2018-02-03",
+          date_received: "2018-02-26",
           type: "mentor_to_student",
           text: "...",
           released_by: null,
@@ -61,19 +62,8 @@ export default {
           flagged_by: 22
         },
         {
-          id: "5",
-          date_received: "2018-02-03",
-          type: "awaiting",
-          text: "...",
-          released_by: null,
-          release_date: "2018-07-13",
-          flagged: true,
-          flagged_by_filter: false,
-          flagged_by: 22
-        },
-        {
           id: "6",
-          date_received: "2018-02-02",
+          date_received: "2018-02-24",
           type: "student_to_mentor",
           text: "...",
 
@@ -85,7 +75,7 @@ export default {
         },
         {
           id: "7",
-          date_received: "2018-02-03",
+          date_received: "2018-02-20",
           type: "mentor_to_student",
           text: "...",
           released_by: null,
@@ -95,19 +85,8 @@ export default {
           flagged_by: 22
         },
         {
-          id: "8",
-          date_received: "2018-02-03",
-          type: "awaiting",
-          text: "...",
-          released_by: null,
-          release_date: "2018-07-13",
-          flagged: true,
-          flagged_by_filter: false,
-          flagged_by: 22
-        },
-        {
           id: "9",
-          date_received: "2018-02-03",
+          date_received: "2018-02-19",
           type: "mentor_to_student",
           text: "...",
           released_by: null,
@@ -155,31 +134,9 @@ export default {
           flagged_by: null
         },
         {
-          id: "12",
-          date_received: "2018-02-03",
-          type: "awaiting",
-          text: "...",
-          released_by: null,
-          release_date: "2018-07-13",
-          flagged: true,
-          flagged_by_filter: false,
-          flagged_by: 22
-        },
-        {
           id: "13",
           date_received: "2018-02-03",
           type: "mentor_to_student",
-          text: "...",
-          released_by: null,
-          release_date: "2018-07-13",
-          flagged: true,
-          flagged_by_filter: false,
-          flagged_by: 22
-        },
-        {
-          id: "14",
-          date_received: "2018-02-03",
-          type: "awaiting",
           text: "...",
           released_by: null,
           release_date: "2018-07-13",

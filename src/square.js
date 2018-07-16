@@ -39,7 +39,7 @@ class Square extends Component {
       color = "#ffffff";
     }
     let email_obj = _.chain(this.state.email).keys().map((key)=>{
-      return <div><b>{key}</b>: {this.state.email[key]}</div>
+      return <div><b>{key}</b>: {this.state.email[key] || 'null'}</div>
     }).value();
     return (
       <div

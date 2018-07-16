@@ -84,7 +84,7 @@ class App extends Component {
       .map(email => {
         if (!email.release_date) {
           /* return this.getSquareJSX(email); */
-          return <Square id={email.id} email={email} />;
+          return <Square key={email.id} id={email.id} email={email} />;
         }
       })
       .filter(item => {
@@ -118,25 +118,35 @@ class App extends Component {
 
       let released_emails_column = [];
       let sorted_exchanges_with_gaps = _.chain(sorted_exchanges)
+        .reverse()
         .reduce((exchanges_with_gaps, email) => {
           let l, gap_length;
           if ((l = exchanges_with_gaps.length)) {
-            console.log(exchanges_with_gaps[l - 1].date, email.date);
-            let date1 = new Date(exchanges_with_gaps[l - 1].date);
-            let date2 = new Date(email.date);
-            gap_length = Math.abs(date1 - date2);
-            console.log(gap_length);
-            /* if (gap_length = Math.abs(new Date(exchanges_with_gaps[l - 1].date) - (email.date)) < 2) {
-             *   console.log(gap_length)
-             * } */
+            let date1 = new Date(exchanges_with_gaps[l - 1].date_received);
+            let date2 = new Date(email.date_received);
+            let gap_length_days =
+              Math.abs(date1 - date2) / (60 * 60 * 24 * 1000);
+            if (
+              gap_length_days >= 2 &&
+              exchanges_with_gaps[l - 1].type == "student_to_mentor"
+            ) {
+              exchanges_with_gaps.push({
+                id: _.uniqueId("gap-"),
+                type: "awaiting",
+                release_date: "2018-07-13"
+              });
+            }
           }
           exchanges_with_gaps.push(email);
           return exchanges_with_gaps;
         }, [])
+        .reverse()
         .value();
-      _.each(sorted_exchanges, email => {
-        if (email.release_date) {
-          released_emails_column.push(<Square id={email.id} email={email} />);
+      _.each(sorted_exchanges_with_gaps, email => {
+        if (email.release_date || email.type == "awaiting") {
+          released_emails_column.push(
+            <Square key={email.id} id={email.id} email={email} />
+          );
         }
       });
 
