@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { Card, CardTitle, CardBody, CardText } from "reactstrap";
 /* import "./App.css"; */
 import * as _ from "lodash";
 import * as d2l_logo from "./d2l_logo.png";
 import data from "./class_sample_json.js";
-import table from "./table.jsx.js";
 import Square from "./square.js";
+import HelpKey from "./helpKey.js";
 
 class App extends Component {
   constructor(props) {
@@ -161,6 +162,7 @@ class App extends Component {
     if (!this.state.logged_in) {
       main = this.getLoginJSX();
     } else {
+      rows.push(<HelpKey />);
       main = rows;
     }
     return (
@@ -170,7 +172,8 @@ class App extends Component {
           display: "block",
           width: "1600px",
           height: "100%",
-          backgroundColor: "white"
+          backgroundColor: "white",
+          position: "relative"
         }}
       >
         <div className="col-sm-12">
