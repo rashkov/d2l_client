@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import * as d2l_logo from "./d2l_logo.png";
 import data from "./class_sample_json.js";
 import table from "./table.jsx.js";
+import Square from "./square.js";
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class App extends Component {
     this.state = {
       logged_in: true,
       retry: false,
-      classroom: data
+      classroom: data,
+      popoverOpen: false
     };
   }
   login(evt) {
@@ -24,47 +26,6 @@ class App extends Component {
         this.setState({ logged_in: false, retry: false });
       }, 1000);
     }
-  }
-  getSquareJSX(email) {
-    console.log(email);
-    let unreleased = !email.release_date;
-    /* let colors = {
-     *   student_email_needs_review: '#b6e4da',
-     *   student_email_released: '#48ab97',
-     *   mentor_email_needs_review: '#b6e4da',
-     *   mentor_email_released: '#48ab97',
-     * } */
-    let color;
-    if (email.type === "student_to_mentor") {
-      if (unreleased) {
-        color = "#b6e4da";
-      } else {
-        color = "#48ab97";
-      }
-    } else if (email.type === "mentor_to_student") {
-      if (unreleased) {
-        color = "#76a0e7";
-      } else {
-        color = "#21265e";
-      }
-    } else {
-      color = "#ffffff";
-    }
-    return (
-      <div
-        key={email.id}
-        style={{
-          display: "inline-block",
-          width: "30px",
-          height: "30px",
-          backgroundColor: color,
-          border: "1px solid black",
-          margin: "5px",
-          marginBottom: "-5px",
-          borderRadius: "5px"
-        }}
-      />
-    );
   }
   getStudentRowJSX(student, action_column, released_emails_column) {
     return (
@@ -122,7 +83,8 @@ class App extends Component {
     let squares = _.chain(exchanges)
       .map(email => {
         if (!email.release_date) {
-          return this.getSquareJSX(email);
+          /* return this.getSquareJSX(email); */
+          return <Square id={email.id} email={email} />;
         }
       })
       .filter(item => {
@@ -174,7 +136,7 @@ class App extends Component {
         .value();
       _.each(sorted_exchanges, email => {
         if (email.release_date) {
-          released_emails_column.push(this.getSquareJSX(email));
+          released_emails_column.push(<Square id={email.id} email={email} />);
         }
       });
 

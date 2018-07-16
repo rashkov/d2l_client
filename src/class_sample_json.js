@@ -16,6 +16,7 @@ export default {
       },
       exchanges: [
         {
+          id: "1",
           date_received: "2018-04-04",
           type: "mentor_to_student",
           text: "...",
@@ -26,6 +27,7 @@ export default {
           flagged_by: null
         },
         {
+          id: "2",
           date_received: "2018-03-03",
           type: "student_to_mentor",
           text: "...",
@@ -36,6 +38,7 @@ export default {
           flagged_by: null
         },
         {
+          id: "3",
           date_received: "2018-02-02",
           type: "student_to_mentor",
           text: "...",
@@ -47,6 +50,7 @@ export default {
           flagged_by: null
         },
         {
+          id: "4",
           date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
@@ -57,6 +61,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "5",
           date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
@@ -67,6 +72,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "6",
           date_received: "2018-02-02",
           type: "student_to_mentor",
           text: "...",
@@ -78,6 +84,7 @@ export default {
           flagged_by: null
         },
         {
+          id: "7",
           date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
@@ -88,6 +95,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "8",
           date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
@@ -98,6 +106,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "9",
           date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
@@ -123,6 +132,7 @@ export default {
       },
       exchanges: [
         {
+          id: "10",
           date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
@@ -133,6 +143,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "11",
           date_received: "2018-02-02",
           type: "student_to_mentor",
           text: "...",
@@ -144,6 +155,7 @@ export default {
           flagged_by: null
         },
         {
+          id: "12",
           date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
@@ -154,6 +166,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "13",
           date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
@@ -164,6 +177,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "14",
           date_received: "2018-02-03",
           type: "awaiting",
           text: "...",
@@ -174,6 +188,7 @@ export default {
           flagged_by: 22
         },
         {
+          id: "15",
           date_received: "2018-02-03",
           type: "mentor_to_student",
           text: "...",
