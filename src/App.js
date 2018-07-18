@@ -6,6 +6,7 @@ import * as d2l_logo from "./d2l_logo.png";
 import data from "./class_sample_json.js";
 import Square from "./square.js";
 import HelpKey from "./helpKey.js";
+import ExchangeTable from "./ExchangeTable.js";
 
 class App extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class App extends Component {
         <div style={{ display: "inline-block", width: "50px", height: "30px" }}>
           {student.mentor.name}
         </div>
-        {action_column}
+        {/* {action_column} */}
         {released_emails_column}
       </div>
     );
@@ -160,9 +161,10 @@ class App extends Component {
       rows.push(student_row);
     });
     if (!this.state.logged_in) {
-      main = this.getLoginJSX();
+      /* main = this.getLoginJSX(); */
+      main = <ExchangeTable class={this.state.classroom} />;
     } else {
-      rows.push(<HelpKey />);
+      rows.push(<HelpKey class={this.state.classroom} />);
       main = rows;
     }
     return (
