@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as _ from "lodash";
+import axios from 'axios';
 
 class ExchangeTable extends Component {
   constructor(props) {
@@ -7,6 +8,13 @@ class ExchangeTable extends Component {
     this.state = {
       classroom: this.props.class
     };
+  }
+  componentDidMount(){
+    axios.get('http://localhost:3333/sessions').then((resp)=>{
+      this.setState({sessions: resp.data.sessions});
+    }).catch((e)=>{
+      console.log(e);
+    });
   }
   render() {
     let a = _.chain(this.state.classroom.students)
@@ -34,8 +42,11 @@ class ExchangeTable extends Component {
         }
       }, [])
       .value();
-    console.log(a);
-    return <div>hey ya</div>;
+    return <div>
+      <select>
+      {_.map(this.state.sessions,(session)=>{ return <option val="session.session_name">{session.session_name}</option>; })}
+      </select>
+    </div>;
   }
 }
 export default ExchangeTable;
