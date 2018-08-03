@@ -3,7 +3,7 @@ import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
 import * as _ from "lodash";
 
 class Square extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     this.state.email = props.email;
@@ -23,13 +23,13 @@ class Square extends Component {
      *   mentor_email_released: '#48ab97',
      * } */
     let color;
-    if (this.state.email.type === "student_to_mentor") {
+    if (this.state.email.exchange_type === "student_to_volunteer") {
       if (unreleased) {
         color = "#b6e4da";
       } else {
         color = "#48ab97";
       }
-    } else if (this.state.email.type === "mentor_to_student") {
+    } else if (this.state.email.exchange_type === "volunteer_to_student") {
       if (unreleased) {
         color = "#76a0e7";
       } else {
@@ -38,12 +38,19 @@ class Square extends Component {
     } else {
       color = "#ffffff";
     }
-    let email_obj = _.chain(this.state.email).keys().map((key)=>{
-      return <div><b>{key}</b>: {JSON.stringify(this.state.email[key] || 'null')}</div>
-    }).value();
+    let email_obj = _.chain(this.state.email)
+      .keys()
+      .map(key => {
+        return (
+          <div>
+            <b>{key}</b>: {JSON.stringify(this.state.email[key] || "null")}
+          </div>
+        );
+      })
+      .value();
     return (
       <div
-      id={'popover-' + this.props.id}
+        id={"popover-" + this.props.id}
         key={this.state.email.id}
         onClick={this.togglePopover.bind(this)}
         style={{
@@ -55,23 +62,21 @@ class Square extends Component {
           margin: "5px",
           marginBottom: "-5px",
           borderRadius: "5px",
-          position: 'relative'
+          position: "relative"
         }}
       >
-        {
-          (this.state.email.flagged)
-            ? <div style={{color:'white', position: 'absolute'}}>F</div>
-            : ''
-        }
+        {this.state.email.flagged ? (
+          <div style={{ color: "white", position: "absolute" }}>F</div>
+        ) : (
+          ""
+        )}
         <Popover
           placement="bottom"
           isOpen={this.state.popoverOpen}
-          target={'popover-' + this.props.id}
+          target={"popover-" + this.props.id}
           toggle={this.togglePopover.bind(this)}
         >
-          <PopoverBody>
-            {email_obj}
-          </PopoverBody>
+          <PopoverBody>{email_obj}</PopoverBody>
         </Popover>
       </div>
     );

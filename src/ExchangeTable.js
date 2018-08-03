@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as _ from "lodash";
 import axios from "axios";
+import { Table } from "reactstrap";
 
 class ExchangeTable extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class ExchangeTable extends Component {
     let main;
     if (this.state.session) {
       console.log("sesh", this.state.session);
+      let max_column = 0;
       let a = _.chain(this.state.session.exchanges)
         .filter(exchange => {
           return !_.isEmpty(exchange.date_released);
@@ -41,6 +43,10 @@ class ExchangeTable extends Component {
             } else {
               exch.column = previous.column + 1;
             }
+            if (exch.column > max_column) {
+              max_column = exch.column;
+            }
+
             return exchanges.concat(exch);
           }
         }, [])
@@ -54,15 +60,28 @@ class ExchangeTable extends Component {
         }, {})
         .value();
       console.log("a", a);
-      main = "hi";
+      console.log(max_column);
+      main = (
+        <Table>
+          <thead>
+            {_.chain(_.range(0, max_column))
+              .reverse()
+              .map(col => {
+                return <th>{col}</th>;
+              })
+              .value()}.
+          </thead>
+          <tbody />
+        </Table>
+      );
     } else {
       console.log("nah");
       main = null;
     }
     return (
       <div>
-        {main}
         {this.state.currentSession}
+        {main}
       </div>
     );
   }
