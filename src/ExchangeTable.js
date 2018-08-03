@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as _ from "lodash";
 import axios from "axios";
 import { Table } from "reactstrap";
+import Square from "./square.js";
 
 class ExchangeTable extends Component {
   constructor(props) {
@@ -61,17 +62,46 @@ class ExchangeTable extends Component {
         .value();
       console.log("a", a);
       console.log(max_column);
+
+      let rows = [];
+      _.each(a, (volunteers, student_id)=>{
+        _.each(volunteers, (emails, volunteer_id)=>{
+          //console.log(student_id, volunteer_id);
+          // let sorted_emails = _.sortBy(emails, 'column');
+          let row = <tr>
+              {_.chain(_.range(0, max_column))
+              .reverse()
+              .map((column)=>{
+                let emails_in_column = _.filter(emails, { column: column });
+                if (emails_in_column.length){
+                  return <td>{_.map(emails_in_column, (email)=>{
+                    return <Square key={email.id} id={email.id} email={email} />;
+                  })}</td>;
+                }else{
+                  return <td/>;
+                }
+              })
+              .value()
+            }
+          </tr>;
+          rows.push(row);
+        });
+      });
       main = (
         <Table>
           <thead>
+            <tr>
             {_.chain(_.range(0, max_column))
               .reverse()
               .map(col => {
                 return <th>{col}</th>;
               })
-              .value()}.
+              .value()}
+            </tr>
           </thead>
-          <tbody />
+          <tbody>
+            {rows}
+          </tbody>
         </Table>
       );
     } else {
