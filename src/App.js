@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import reactstrap from "reactstrap";
 import { Card, CardTitle, CardBody, CardText } from "reactstrap";
 /* import "./App.css"; */
 import * as _ from "lodash";
@@ -15,8 +17,18 @@ class App extends Component {
       logged_in: false,
       retry: false,
       classroom: data,
-      popoverOpen: false
+      sessions: null,
+      popoverOpen: false,
+      currentSession: null
     };
+  }
+  componentWillMount() {
+    axios.get("http://localhost:3333/sessions").then(res => {
+      this.setState({
+        sessions: res.data.sessions,
+        currentSession: res.data.sessions[0].session_name
+      });
+    });
   }
   login(evt) {
     evt.preventDefault();
@@ -162,7 +174,20 @@ class App extends Component {
     });
     if (!this.state.logged_in) {
       /* main = this.getLoginJSX(); */
-      main = <ExchangeTable class={this.state.classroom} />;
+      main = (
+        <div>
+          <select className="form-control">
+            {_.map(this.state.sessions, session => {
+              return (
+                <option value={session.session_name}>
+                  {session.school_name} - {session.session_name}
+                </option>
+              );
+            })};
+          </select>
+          <ExchangeTable currentSession={this.state.currentSession} />
+        </div>
+      );
     } else {
       rows.push(<HelpKey class={this.state.classroom} />);
       main = rows;
