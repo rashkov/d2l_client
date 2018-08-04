@@ -9,6 +9,7 @@ import data from "./class_sample_json.js";
 import Square from "./square.js";
 import HelpKey from "./helpKey.js";
 import ExchangeTable from "./ExchangeTable.js";
+import {api_url, loc_url} from "./config.js";
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends Component {
     };
   }
   componentWillMount() {
-    axios.get("http://localhost:3333/sessions").then(res => {
+    axios.get(`${api_url()}/sessions`).then(res => {
       this.setState({
         sessions: res.data.sessions,
         currentSession: res.data.sessions[0].session_name
@@ -120,6 +121,9 @@ class App extends Component {
       return node;
     }
   }
+  setSession(evt){
+    this.setState({currentSession: evt.currentTarget.value});
+  }
   render() {
     let main,
       rows = [];
@@ -176,7 +180,7 @@ class App extends Component {
       /* main = this.getLoginJSX(); */
       main = (
         <div>
-          <select className="form-control">
+          <select className="form-control" onChange={this.setSession.bind(this)}>
             {_.map(this.state.sessions, session => {
               return (
                 <option value={session.session_name}>

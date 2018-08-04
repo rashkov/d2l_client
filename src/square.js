@@ -43,7 +43,7 @@ class Square extends Component {
       .map(key => {
         return (
           <div>
-            <b>{key}</b>: {JSON.stringify(this.state.email[key] || "null")}
+            <b>{key}</b>: {JSON.stringify(this.state.email[key])}
           </div>
         );
       })

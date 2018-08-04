@@ -3,6 +3,8 @@ import * as _ from "lodash";
 import axios from "axios";
 import { Table } from "reactstrap";
 import Square from "./square.js";
+import "./ExchangeTable.css";
+import {api_url, loc_url} from "./config.js";
 
 class ExchangeTable extends Component {
   constructor(props) {
@@ -12,13 +14,10 @@ class ExchangeTable extends Component {
       currentSession: null
     };
   }
-  componentWillMount() {
-    console.log("hi", this.props);
-  }
   componentWillReceiveProps(nextProps) {
     this.setState({ currentSession: nextProps.currentSession });
     axios
-      .get(`http://localhost:3333/sessions/${nextProps.currentSession}`)
+      .get(`${api_url()}/sessions/${nextProps.currentSession}`)
       .then(resp => {
         this.setState({ session: resp.data.session });
       });
@@ -48,6 +47,7 @@ class ExchangeTable extends Component {
               max_column = exch.column;
             }
 
+            console.log(exch.column);
             return exchanges.concat(exch);
           }
         }, [])
@@ -66,10 +66,8 @@ class ExchangeTable extends Component {
       let rows = [];
       _.each(a, (volunteers, student_id)=>{
         _.each(volunteers, (emails, volunteer_id)=>{
-          //console.log(student_id, volunteer_id);
-          // let sorted_emails = _.sortBy(emails, 'column');
           let row = <tr>
-              {_.chain(_.range(0, max_column))
+            {_.chain(_.range(0, max_column))
               .reverse()
               .map((column)=>{
                 let emails_in_column = _.filter(emails, { column: column });
@@ -90,7 +88,7 @@ class ExchangeTable extends Component {
       main = (
         <Table>
           <thead>
-            <tr>
+            <tr className="exchange-head">
             {_.chain(_.range(0, max_column))
               .reverse()
               .map(col => {
