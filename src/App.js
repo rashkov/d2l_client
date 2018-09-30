@@ -24,7 +24,7 @@ class App extends Component {
     };
   }
   componentWillMount() {
-    axios.get(`${localhost_url()}/session`).then(res => {
+    axios.get(`${api_url()}/session`).then(res => {
       this.setState({
         sessions: [res.data],
         currentSession: res.data.session_name

@@ -16,7 +16,7 @@ class ExchangeTable extends Component {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ currentSession: nextProps.currentSession });
-    axios.get(`${localhost_url()}/session`).then(resp => {
+    axios.get(`${api_url()}/session`).then(resp => {
       this.setState({ session: resp.data });
     });
   }

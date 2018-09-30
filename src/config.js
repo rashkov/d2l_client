@@ -1,5 +1,5 @@
 export function api_url(){
-  return "http://d2ls.herokuapp.com";
+  return "https://dialogtolearn-restservice.azurewebsites.net/";
 }
 
 export function localhost_url(){
