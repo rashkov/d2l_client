@@ -15,7 +15,7 @@ class Square extends Component {
     });
   }
   render() {
-    let unreleased = !this.state.email.release_date;
+    let unreleased = this.state.email.state != "Sent";
     /* let colors = {
      *   student_email_needs_review: '#b6e4da',
      *   student_email_released: '#48ab97',

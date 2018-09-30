@@ -31,7 +31,8 @@ class ExchangeTable extends Component {
       // where 11 is the student_id and 9 is volunteer_id
       let indexed_emails = _.chain(this.state.session.emails)
         .filter(email => {
-          return email.state == "Sent"; // Only look at sent emails
+          //return email.state == "Sent"; // Only look at sent emails
+          return true;
         })
         .orderBy(["envelope_datetime"]) // Order by datetime, making this a chronological list of emails coming into the system
         //.tap(console.log)
@@ -104,7 +105,6 @@ class ExchangeTable extends Component {
               <td>{display_names.volunteer_display_name}</td>
               {_.chain(_.range(0, max_column + 1))
                 .map(column => {
-                  console.log("col", column);
                   let emails_in_column = _.filter(emails, { column: column });
                   if (emails_in_column.length) {
                     return (
@@ -153,15 +153,9 @@ class ExchangeTable extends Component {
         </Table>
       );
     } else {
-      console.log("nah");
       main = null;
     }
-    return (
-      <div>
-        {this.state.currentSession}
-        {main}
-      </div>
-    );
+    return <div>{main}</div>;
   }
 }
 export default ExchangeTable;
