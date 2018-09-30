@@ -42,26 +42,26 @@ class App extends Component {
       }, 1000);
     }
   }
-  getStudentRowJSX(student, action_column, released_emails_column) {
-    return (
-      <div>
-        <div
-          style={{
-            display: "inline-block",
-            width: "50px",
-            height: "30px"
-          }}
-        >
-          {student.name}
-        </div>
-        <div style={{ display: "inline-block", width: "50px", height: "30px" }}>
-          {student.mentor.name}
-        </div>
-        {/* {action_column} */}
-        {released_emails_column}
-      </div>
-    );
-  }
+  //getStudentRowJSX(student, action_column, released_emails_column) {
+  //  return (
+  //    <div>
+  //      <div
+  //        style={{
+  //          display: "inline-block",
+  //          width: "50px",
+  //          height: "30px"
+  //        }}
+  //      >
+  //        {student.name}
+  //      </div>
+  //      <div style={{ display: "inline-block", width: "50px", height: "30px" }}>
+  //        {student.mentor.name}
+  //      </div>
+  //      {/* {action_column} */}
+  //      {released_emails_column}
+  //    </div>
+  //  );
+  //}
   getLoginJSX() {
     return (
       <div>
@@ -94,33 +94,33 @@ class App extends Component {
       </div>
     );
   }
-  getActionColumnJSX(exchanges) {
-    let squares = _.chain(exchanges)
-      .map(email => {
-        if (!email.release_date) {
-          /* return this.getSquareJSX(email); */
-          return <Square key={email.id} id={email.id} email={email} />;
-        }
-      })
-      .filter(item => {
-        return item;
-      })
-      .value();
-    if (squares.length > 0) {
-      let node = (
-        <div
-          style={{
-            border: "1px solid #cc0000",
-            display: "inline-block",
-            paddingBottom: "5px"
-          }}
-        >
-          {squares}
-        </div>
-      );
-      return node;
-    }
-  }
+  //getActionColumnJSX(exchanges) {
+  //  let squares = _.chain(exchanges)
+  //    .map(email => {
+  //      if (!email.release_date) {
+  //        /* return this.getSquareJSX(email); */
+  //        return <Square key={email.id} id={email.id} email={email} />;
+  //      }
+  //    })
+  //    .filter(item => {
+  //      return item;
+  //    })
+  //    .value();
+  //  if (squares.length > 0) {
+  //    let node = (
+  //      <div
+  //        style={{
+  //          border: "1px solid #cc0000",
+  //          display: "inline-block",
+  //          paddingBottom: "5px"
+  //        }}
+  //      >
+  //        {squares}
+  //      </div>
+  //    );
+  //    return node;
+  //  }
+  //}
   setSession(evt) {
     this.setState({ currentSession: evt.currentTarget.value });
   }
@@ -128,54 +128,54 @@ class App extends Component {
     let main,
       rows = [];
 
-    _.each(this.state.classroom.students, student => {
-      let sorted_exchanges = _.chain(student.exchanges)
-        .sortBy("date_received")
-        .reverse()
-        .value();
+    /* _.each(this.state.classroom.students, student => {
+     *   let sorted_exchanges = _.chain(student.exchanges)
+     *     .sortBy("date_received")
+     *     .reverse()
+     *     .value();
 
-      let released_emails_column = [];
-      let sorted_exchanges_with_gaps = _.chain(sorted_exchanges)
-        .reverse()
-        .reduce((exchanges_with_gaps, email) => {
-          let l, gap_length;
-          if ((l = exchanges_with_gaps.length)) {
-            let date1 = new Date(exchanges_with_gaps[l - 1].date_received);
-            let date2 = new Date(email.date_received);
-            let gap_length_days =
-              Math.abs(date1 - date2) / (60 * 60 * 24 * 1000);
-            if (
-              gap_length_days >= 2 &&
-              exchanges_with_gaps[l - 1].type == "student_to_mentor"
-            ) {
-              exchanges_with_gaps.push({
-                id: _.uniqueId("gap-"),
-                type: "awaiting",
-                release_date: "2018-07-13"
-              });
-            }
-          }
-          exchanges_with_gaps.push(email);
-          return exchanges_with_gaps;
-        }, [])
-        .reverse()
-        .value();
-      _.each(sorted_exchanges_with_gaps, email => {
-        if (email.release_date || email.type == "awaiting") {
-          released_emails_column.push(
-            <Square key={email.id} id={email.id} email={email} />
-          );
-        }
-      });
+     *   let released_emails_column = [];
+     *   let sorted_exchanges_with_gaps = _.chain(sorted_exchanges)
+     *     .reverse()
+     *     .reduce((exchanges_with_gaps, email) => {
+     *       let l, gap_length;
+     *       if ((l = exchanges_with_gaps.length)) {
+     *         let date1 = new Date(exchanges_with_gaps[l - 1].date_received);
+     *         let date2 = new Date(email.date_received);
+     *         let gap_length_days =
+     *           Math.abs(date1 - date2) / (60 * 60 * 24 * 1000);
+     *         if (
+     *           gap_length_days >= 2 &&
+     *           exchanges_with_gaps[l - 1].type == "student_to_mentor"
+     *         ) {
+     *           exchanges_with_gaps.push({
+     *             id: _.uniqueId("gap-"),
+     *             type: "awaiting",
+     *             release_date: "2018-07-13"
+     *           });
+     *         }
+     *       }
+     *       exchanges_with_gaps.push(email);
+     *       return exchanges_with_gaps;
+     *     }, [])
+     *     .reverse()
+     *     .value();
+     *   _.each(sorted_exchanges_with_gaps, email => {
+     *     if (email.release_date || email.type == "awaiting") {
+     *       released_emails_column.push(
+     *         <Square key={email.id} id={email.id} email={email} />
+     *       );
+     *     }
+     *   });
 
-      let action_column = this.getActionColumnJSX(sorted_exchanges);
-      let student_row = this.getStudentRowJSX(
-        student,
-        action_column,
-        released_emails_column
-      );
-      rows.push(student_row);
-    });
+     *   let action_column = this.getActionColumnJSX(sorted_exchanges);
+     *   let student_row = this.getStudentRowJSX(
+     *     student,
+     *     action_column,
+     *     released_emails_column
+     *   );
+     *   rows.push(student_row);
+     * }); */
     if (!this.state.logged_in) {
       /* main = this.getLoginJSX(); */
       main = (
