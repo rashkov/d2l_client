@@ -2,6 +2,6 @@ export function api_url(){
   return "http://d2ls.herokuapp.com";
 }
 
-export function loc_url(){
-  return "http://localhost:3333";
+export function localhost_url(){
+  return "http://localhost:8080";
 }

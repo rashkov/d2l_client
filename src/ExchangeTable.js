@@ -4,7 +4,7 @@ import axios from "axios";
 import { Table } from "reactstrap";
 import Square from "./square.js";
 import "./ExchangeTable.css";
-import {api_url, loc_url} from "./config.js";
+import { api_url, localhost_url } from "./config.js";
 
 class ExchangeTable extends Component {
   constructor(props) {
@@ -16,11 +16,9 @@ class ExchangeTable extends Component {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ currentSession: nextProps.currentSession });
-    axios
-      .get(`${api_url()}/sessions/${nextProps.currentSession}`)
-      .then(resp => {
-        this.setState({ session: resp.data.session });
-      });
+    axios.get(`${localhost_url()}/session`).then(resp => {
+      this.setState({ session: resp.data });
+    });
   }
   render() {
     let main;
