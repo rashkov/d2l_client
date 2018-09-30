@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as _ from "lodash";
 import axios from "axios";
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 import Square from "./square.js";
 import "./ExchangeTable.css";
 import { api_url, localhost_url } from "./config.js";
@@ -79,8 +79,29 @@ class ExchangeTable extends Component {
       let rows = [];
       _.each(indexed_emails, (volunteers, student_id) => {
         _.each(volunteers, (emails, volunteer_id) => {
+          // Look up the student & volunteer names
+          let display_names = _.chain(this.state.session.students)
+            .filter(student => student.id == student_id)
+            .map(student => {
+              let volunteer = _.find(
+                student.volunteerBuddies,
+                volunteer => volunteer.id == volunteer_id
+              );
+              return {
+                student_display_name: `${student.first_name} ${
+                  student.last_name
+                }`,
+                volunteer_display_name: `${volunteer.first_name} ${
+                  volunteer.last_name
+                }`
+              };
+            })
+            .head()
+            .value();
           let row = (
             <tr>
+              <td>{display_names.student_display_name}</td>
+              <td>{display_names.volunteer_display_name}</td>
               {_.chain(_.range(0, max_column + 1))
                 .map(column => {
                   console.log("col", column);
@@ -113,10 +134,17 @@ class ExchangeTable extends Component {
         <Table bordered>
           <thead>
             <tr className="exchange-head">
+              {_.chain(["Student", "Volunteer"])
+                .map(s => <th>{s}</th>)
+                .value()}
               {_.chain(_.range(0, max_column + 1))
                 .reverse()
                 .map(col => {
-                  return <th>{col}</th>;
+                  return (
+                    <th>
+                      <Button>Release All</Button>
+                    </th>
+                  );
                 })
                 .value()}
             </tr>
